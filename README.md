@@ -50,7 +50,7 @@ docker-compose.yaml приложение + PostgreSQL
 
 ```bash
 cp .env.example .env        # задайте свой пароль в .env
-docker compose up -d --build
+docker compose up -d --build 
 ```
 
 Приложение: http://localhost:5000
