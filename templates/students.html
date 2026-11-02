@@ -17,9 +17,6 @@
 </form>
 {% if count is not none %}
   <p class="result">Форма «{{ selected }}»: <strong>{{ count }}</strong> студ.</p>
-  {% if avg %}
-    <p class="result">Средний балл: <strong>{{ avg }}</strong></p>
-  {% endif %}
 {% endif %}
 
 <h2>Список студентов</h2>
