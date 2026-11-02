@@ -28,7 +28,7 @@ def index():
 
     # Оценки выбранного студента
     student_id = request.args.get("student_id", type=int)
-    student, my_grades = None, None
+    student, my_grades, avg = None, None, None
     if student_id:
         student = query("SELECT * FROM students WHERE id = %s", (student_id,), one=True)
         if student is None:
@@ -39,9 +39,13 @@ def index():
             "WHERE g.student_id = %s ORDER BY g.study_year, p.semester, p.discipline",
             (student_id,),
         )
+        numbers = [int(g["grade"]) for g in my_grades if g["grade"].isdigit()]
+        if numbers:
+            avg = round(sum(numbers) / len(numbers), 2)
+
 
     return render_template(
         "student.html", disciplines=disciplines, students=students,
         discipline=discipline, plan_rows=plan_rows, total_hours=total_hours,
-        student=student, my_grades=my_grades,
+        student=student, my_grades=my_grades, avg=avg,
     )
